@@ -22,17 +22,19 @@ class Bootstrap {
 	 */
 	function create() {
 
-		global $rp;
+		$reception_perception = get_reception_perception();
 
-		$rp -> meta                  = new Meta;
-		$rp -> settings              = new Settings;
-		$rp -> post_meta_fields      = new PostMetaFields;		
-		$rp -> config                = new Config;
-		$rp -> enqueue               = new Enqueue;		
-		$rp -> subsite_control_panel = new SubsiteControlPanel;
-		$rp -> post_meta_box         = new PostMetaBox;
+		$reception_perception -> meta                  = new Meta;
+		$reception_perception -> subsite_settings      = new SubsiteSettings;
+		$reception_perception -> post_types            = new PostTypes;
+		$reception_perception -> taxonomies            = new Taxonomies;
+		$reception_perception -> post_meta_fields      = new PostMetaFields;		
+		$reception_perception -> config                = new Config;
+		$reception_perception -> enqueue               = new Enqueue;		
+		$reception_perception -> subsite_control_panel = new SubsiteControlPanel;
+		$reception_perception -> post_meta_box         = new PostMetaBox;
 
-		return $rp;
+		return $reception_perception;
 
 	}
 

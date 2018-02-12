@@ -14,10 +14,6 @@ trait Form {
 
 	function sanitize( $dirty = array() ) {
 
-		// Upon saving settings, we dump our transients.
-		$cache  = new Cache;
-		$cache -> delete();
-
 		// Will hold cleaned values.
 		$clean = array();
 

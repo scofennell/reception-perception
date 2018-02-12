@@ -14,8 +14,8 @@ class Config {
 
 	function __construct() {
 
-		global $rp;
-		$this -> settings = $rp -> settings;
+		$reception_perception     = get_reception_perception();
+		$this -> subsite_settings = $reception_perception -> subsite_settings;
 
 	}	
 

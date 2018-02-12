@@ -37,34 +37,334 @@ class PostMetaFields {
 
 		$out = array(
 
-			// A section.
-			'a_section' => array(
+			// A post type.
+			'player' => array(
 
-				// The label for this section.
-				'label' => esc_html__( 'A Section', 'rp' ),
+				// A section.
+				'bio' => array(
 
-				// The settings for this section.
-				'settings' => array(
+					// The label for this section.
+					'label' => esc_html__( 'Bio', 'rp' ),
 
-					// A setting.
-					'a_setting' => array(
-						'type'           => 'checkbox',
-						'label'          => esc_html__( 'Check a box?', 'rp' ),
-						'description'    => esc_html__( 'When this box is checked, you have checked this box.', 'rp' ),
-						'checkbox_value' => 1,
+					// The settings for this section.
+					'settings' => array(
+
+						// A setting.
+						'last_name' => array(
+							'type'           => 'text',
+							'label'          => esc_html__( 'Last Name', 'rp' ),
+							'description'    => esc_html__( 'Last name.', 'rp' ),
+						),
+
+						// A setting.
+						'first_name' => array(
+							'type'           => 'text',
+							'label'          => esc_html__( 'First Name', 'rp' ),
+							'description'    => esc_html__( 'First name.', 'rp' ),
+						),	
+
+						'years_experience' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Years Experience', 'rp' ),
+							'description'    => esc_html__( 'Years experience.', 'rp' ),
+						),						
+
+						'birth_date' => array(
+							'type'           => 'date',
+							'label'          => esc_html__( 'Birth Date', 'rp' ),
+							'description'    => esc_html__( 'Birth date.', 'rp' ),
+						),
+
 					),
-
-					// A setting.
-					'b_setting' => array(
-						'type'        => 'checkbox_group',
-						'label'       => esc_html__( 'Check boxes?', 'rp' ),
-						'description' => esc_html__( 'When these boxes are checked, you have checked these boxes.', 'rp' ),
-						'options_cb'  => array( 'Fields', 'get_pages_as_checkboxes' ),
-					),		
 
 				),
 
-			),	
+				// A section.
+				'skills' => array(
+
+					// The label for this section.
+					'label' => esc_html__( 'Skills', 'rp' ),
+
+					// The settings for this section.
+					'settings' => array(
+
+						// A setting.
+						'bt_0' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Last Name', 'rp' ),
+							'description'    => esc_html__( 'Last name.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						// A setting.
+						'bt_1' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'One Broken Tackle', 'rp' ),
+							'description'    => esc_html__( 'One broken tackle.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						'bt_2' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Two or More Broken Tackles', 'rp' ),
+							'description'    => esc_html__( 'Two or more broken tackles.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),			
+
+						'contested_catch' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Contested Catch', 'rp' ),
+							'description'    => esc_html__( 'Contested catch.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+					),
+
+				),	
+
+				// A section.
+				'route_tree_percentage' => array(
+
+					// The label for this section.
+					'label' => esc_html__( 'Route Tree Percentage', 'rp' ),
+
+					// The settings for this section.
+					'settings' => array(
+
+						// A setting.
+						'nine' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Nine', 'rp' ),
+							'description'    => esc_html__( 'Nine.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						// A setting.
+						'post' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Post', 'rp' ),
+							'description'    => esc_html__( 'Post.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						'dig' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Dig', 'rp' ),
+							'description'    => esc_html__( 'Dig.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),			
+
+						'curl' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Curl', 'rp' ),
+							'description'    => esc_html__( 'Curl.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						// A setting.
+						'slant' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Slant', 'rp' ),
+							'description'    => esc_html__( 'Slant.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						'screen' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Screen', 'rp' ),
+							'description'    => esc_html__( 'Screen.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),	
+
+						'other' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Other', 'rp' ),
+							'description'    => esc_html__( 'Other.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						// A setting.
+						'flat' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Flat', 'rp' ),
+							'description'    => esc_html__( 'Flat.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						'comeback' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Comeback', 'rp' ),
+							'description'    => esc_html__( 'Comeback.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),	
+
+						'out' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Out', 'rp' ),
+							'description'    => esc_html__( 'Out.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						// A setting.
+						'corner' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Corner', 'rp' ),
+							'description'    => esc_html__( 'Corner.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+					),
+
+				),	
+
+				// A section.
+				'success_rate_coverage' => array(
+
+					// The label for this section.
+					'label' => esc_html__( 'Success Rate VS Coverage', 'rp' ),
+
+					// The settings for this section.
+					'settings' => array(
+
+						// A setting.
+						'nine' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Nine', 'rp' ),
+							'description'    => esc_html__( 'Nine.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						// A setting.
+						'post' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Post', 'rp' ),
+							'description'    => esc_html__( 'Post.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						'dig' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Dig', 'rp' ),
+							'description'    => esc_html__( 'Dig.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),			
+
+						'curl' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Curl', 'rp' ),
+							'description'    => esc_html__( 'Curl.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						// A setting.
+						'slant' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Slant', 'rp' ),
+							'description'    => esc_html__( 'Slant.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						'screen' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Screen', 'rp' ),
+							'description'    => esc_html__( 'Screen.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),	
+
+						'other' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Other', 'rp' ),
+							'description'    => esc_html__( 'Other.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						// A setting.
+						'flat' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Flat', 'rp' ),
+							'description'    => esc_html__( 'Flat.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						'comeback' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Comeback', 'rp' ),
+							'description'    => esc_html__( 'Comeback.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),	
+
+						'out' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Out', 'rp' ),
+							'description'    => esc_html__( 'Out.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+						// A setting.
+						'corner' => array(
+							'type'           => 'number',
+							'label'          => esc_html__( 'Corner', 'rp' ),
+							'description'    => esc_html__( 'Corner.', 'rp' ),
+							'attrs'          => array(
+								'step' => 'any'
+							),
+						),
+
+					),
+
+				),	
+
+			),									
 
 		);
 

@@ -15,7 +15,9 @@ class SubsiteControlPanel {
 	function __construct() {
 
 		// Grab the array of settings.
-		$subsite_settings               = new SubsiteSettings;
+
+		$subsite_settings = get_reception_perception() -> subsite_settings;
+		
 		$this -> subsite_settings_array  = $subsite_settings -> get_settings_array();
 		$this -> subsite_settings_values = $subsite_settings -> get_settings_values();
 		$this -> subsite_settings_slug   = $subsite_settings -> get_settings_slug();
@@ -29,6 +31,9 @@ class SubsiteControlPanel {
 
 		// Register our settings.
 		add_action( 'admin_init', array( $this, 'register' ) );
+
+		// Register our settings.
+		add_action( 'current_screen', array( $this, 'maybe_import' ) );		
 		
 	}
 
@@ -294,15 +299,24 @@ class SubsiteControlPanel {
 				/**
 				 * Reach into the database value and find the value for this setting, in this section.
 				 */
-				$value = esc_textarea( $data[ $settings_section_id ][ $setting_id ] );
-										
+				$value = FALSE;
+				if( isset( $data[ $settings_section_id ] ) ) {
+					if( isset( $data[ $settings_section_id ][ $setting_id ] ) ) {
+						$value = $data[ $settings_section_id ][ $setting_id ];
+					}
+				}
+
 				if( $type == 'textarea' ) {
+
+					$value = esc_textarea( $value );
 
 					$out = "
 						<textarea style='min-height: 10em;' class='widefat' name='$name' id='$id'>$value</textarea>
 					";
 				
 				} else {
+
+					$value = esc_attr( $value );
 
 					$out = "
 						<input type='$type' name='$name' id='$id' value='$value'>
@@ -322,6 +336,32 @@ class SubsiteControlPanel {
 		}
 
 		return $out;
+
+	}
+
+	function maybe_import() {
+
+		$current_screen = get_current_screen();
+
+		if( ! isset( $_REQUEST['option_page'] ) ) { return FALSE; }
+		$option_page = $_REQUEST['option_page'];
+		if( $option_page != RECEPTION_PERCEPTION . '_subsite' ) { return FALSE; }
+
+		if( ! isset( $_REQUEST['action'] ) ) { return FALSE; }
+		$action = $_REQUEST['action'];
+		if( $action != 'update' ) { return FALSE; }		
+
+		if( ! isset( $_REQUEST[ RECEPTION_PERCEPTION . '_subsite'] ) ) { return FALSE; }
+		$posted = $_REQUEST[ RECEPTION_PERCEPTION . '_subsite'];
+		if( ! isset( $posted['data'] ) ) { return FALSE; }
+		if( ! isset( $posted['data']['google_sheets_url'] ) ) { return FALSE; }
+
+		$url = esc_url_raw( $posted['data']['google_sheets_url'] );	
+
+		$import = new Import( $url );
+		$run    = $import -> run();
+
+		$this -> import_result = $run -> rows_imported;
 
 	}
 

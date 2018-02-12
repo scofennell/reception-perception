@@ -31,85 +31,25 @@ class SubsiteSettings {
 		$out = array();
 
 		// Create the "section_1" section.
-		$out['section_1'] = array(
+		$out['data'] = array(
 
 			// The label for this settings section.
-			'label' => esc_html__( 'Section 1', 'rp' ),
+			'label' => esc_html__( 'Data', 'rp' ),
 			
 			// The array of settings for this section.
 			'settings' => array(
 
 	            // A setting.
-				'setting_1' => array(
+				'google_sheets_url' => array(
 
 					// The user-facing label text for this setting.
-					'label'    => esc_html__( 'Setting 1', 'rp' ),
+					'label'    => esc_html__( 'Google Sheets URL', 'rp' ),
 					
 					// The type of form input.
-					'type'     => 'text',
+					'type'     => 'url',
 					
 					// Some notes for this setting.
-					'notes'    => esc_html__( 'A setting in section 1', 'rp' ),
-
-				// End this setting.
-				),	
-
-				// Another setting.
-				'setting_2' => array(
-					
-					// The user-facing label text for this setting.
-					'label'    => esc_html__( 'Setting 2', 'rp' ),
-					
-					// The type of form input.
-					'type'     => 'textarea',
-					
-					// Some notes for this setting.
-					'notes'    => esc_html__( 'Hello', 'rp' ),
-
-				// End this setting.
-				),
-				
-			// End the list of settings for this section.
-			)
-
-		// End this section.
-		);
-		
-		// Create the "section_2" section.
-		$out['section_2'] = array(
-
-			// The label for this settings section.
-			'label' => esc_html__( 'Section 2', 'rp' ),
-			
-			// The array of settings for this section.
-			'settings' => array(
-
-	            // A setting.
-				'setting_1' => array(
-
-					// The user-facing label text for this setting.
-					'label'    => esc_html__( 'Setting 1', 'rp' ),
-					
-					// The type of form input.
-					'type'     => 'text',
-					
-					// Some notes for this setting.
-					'notes'    => esc_html__( 'A setting in section 2', 'rp' ),
-
-				// End this setting.
-				),	
-
-				// Another setting.
-				'setting_2' => array(
-					
-					// The user-facing label text for this setting.
-					'label'    => esc_html__( 'Setting 2', 'rp' ),
-					
-					// The type of form input.
-					'type'     => 'textarea',
-					
-					// Some notes for this setting.
-					'notes'    => esc_html__( 'World', 'rp' ),
+					'notes'    => esc_html__( 'A google sheets url.', 'rp' ),
 
 				// End this setting.
 				),

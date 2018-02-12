@@ -25,7 +25,7 @@ spl_autoload_register( function( $class ) {
 	$relative_class = substr( $class, $len );
 	$relative_class = str_replace( '\\', '', $relative_class );
 	$file           = $inc . $relative_class . '.php';
-	
+
 	if( ! file_exists( $file ) ) {
 		return FALSE;
 	}

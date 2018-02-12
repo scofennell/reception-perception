@@ -57,3 +57,11 @@ require_once( RECEPTION_PERCEPTION_PATH . 'autoload.php' );
 
 // Execute the plugin code!
 new $reception_perception -> bootstrap;
+
+function get_reception_perception() {
+
+	global $reception_perception;
+
+	return $reception_perception;
+
+}

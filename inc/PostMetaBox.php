@@ -17,33 +17,23 @@ class PostMetaBox {
 	function __construct() {
 
 		// Grab our plugin-wide helpers.
-		global $rp;
-		$this -> meta     = $rp -> meta;
-		$this -> settings = $rp -> settings;
-		$this -> config   = $rp -> config;
+		$reception_perception = get_reception_perception();
+
+		$this -> meta             = $reception_perception -> meta;
+		$this -> subsite_settings = $reception_perception -> subsite_settings;
+		$this -> config           = $reception_perception -> config;
 		
 		global $post_id;
 
 		// Grab the list of meta fields.
-		$this -> post_meta_fields = $rp -> post_meta_fields;
-		$this -> meta_fields      = $this    -> post_meta_fields -> get_fields();
+		$this -> post_meta_fields = $reception_perception -> post_meta_fields;
+		$this -> meta_fields      = $this -> post_meta_fields -> get_fields();
 
 		// Add our meta boxes.
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		
 		// Handle the saving of our meta boxes.
 		add_action( 'save_post', array( $this, 'save_post' ), 10, 3 );
-
-	}
-
-	/**
-	 * Get the list of post types on which we're allowing our meta box.
-	 * 
-	 * @return array An array of post type slugs.
-	 */
-	function get_allowed_post_types() {
-
-		return array( 'post' );
 
 	}
 
@@ -67,11 +57,7 @@ class PostMetaBox {
 		// If we're not on the post screen, bail.
 		$base      = $current_screen -> base;
 		if( $base != 'post' ) { return FALSE; }
-
-		// If the post type is not in our allowed array, bail.
-		$post_type = $current_screen -> post_type;
-		if( ! in_array( $post_type, $this -> get_allowed_post_types() ) ) { return FALSE; }
-		
+	
 		return TRUE;
 
 	}
@@ -84,7 +70,6 @@ class PostMetaBox {
 	public function add_meta_boxes( $post_type ) {
 
 		// If we're not on the correct page, bail.
-		if( ! in_array( $post_type, $this -> get_allowed_post_types() ) ) { return FALSE; }
 		if( ! $this -> is_current_page() ) { return FALSE; }
 
 		$id            = RECEPTION_PERCEPTION;
@@ -128,6 +113,8 @@ class PostMetaBox {
 
 		$post_id = absint( $post -> ID );
 
+		$post_type = $post -> post_type;
+
 		// Grab the meta values for this post.
 		$values = array();
 		if( ! empty( $post_id ) ) {
@@ -135,7 +122,8 @@ class PostMetaBox {
 		}
 
 		// Grab the meta field inputs.
-		$fields = $this -> meta_fields;
+		$post_types = $this -> meta_fields;
+		$fields = $post_types[ $post_type ];
 
 		// Loop through the array of sections and inputs.
 		$count = count( $fields );
@@ -346,13 +334,6 @@ class PostMetaBox {
 
 		// Is this a revision?
 		if( wp_is_post_revision( $post_id ) ) {
-			return $post_id;
-		}
-
-		// Is this an allowed post type?
-		$post_type = $post -> post_type;
-		$allowed   = $this -> get_allowed_post_types();
-		if( ! in_array( $post_type, $allowed ) ) {
 			return $post_id;
 		}
 
