@@ -58,13 +58,13 @@ var receptionPerception = {
 /**
  * Our jQuery plugin for doing something.
  */
-jQuery( document ).ready( function() {
+jQuery( window ).load( function() {
 
 	// Start an options object that we'll pass when we use our jQuery plugin.
 	var options = {};
 
 	// Apply our plugin to our thing.
-	jQuery( '.rp-thing' ).receptionPerceptionThing( options );
+	jQuery( '.Reception_PerceptionGraphic-get' ).receptionPerceptionThing( options );
 
 });
 
@@ -84,6 +84,23 @@ jQuery( document ).ready( function( $ ) {
 			// Save a reference to the thing, so that we may safely use "this" later.
 			var that = this;
 
+			var trigger = $( that ).find( '.Reception_PerceptionGraphic-get-trigger' );
+			var target = $( that ).find( '.Reception_PerceptionGraphic-get-target' );
+
+			$( trigger ).click( function( evt ) {
+				evt.preventDefault();
+				
+				var el = $( target )[0];
+
+				html2canvas( el ).then( function( canvas ) {
+
+					var base64encodedstring = canvas.toDataURL( "image/jpeg", 1 );
+					$( '<img>' ).attr( 'src', base64encodedstring ).hide().appendTo( that ).fadeIn();
+
+				});
+			
+			});
+
 			// Make our plugin chainable.
 			return this;
 
@@ -91,6 +108,6 @@ jQuery( document ).ready( function( $ ) {
 		});
 
 	// End the definition of our plugin.
-	}
+	};
 
 }( jQuery ) );

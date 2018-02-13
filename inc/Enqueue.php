@@ -21,7 +21,9 @@ class Enqueue {
 		add_action( 'admin_enqueue_scripts', array( $this, 'style' ) );
 
 		// Add our CSS to the front end (due to admin bar).
-		add_action( 'wp_enqueue_scripts', array( $this, 'style' ) );		
+		add_action( 'wp_enqueue_scripts', array( $this, 'style' ) );
+
+		add_action( 'wp_enqueue_scripts', array( $this, 'script' ) );				
         
 	}
 
@@ -37,6 +39,8 @@ class Enqueue {
 
 		// Enqueue our plugin JS.
 		wp_enqueue_script( RECEPTION_PERCEPTION . '-script' );
+
+		wp_register_script( 'html2canvas', RECEPTION_PERCEPTION_URL . 'js/html2canvas.min.js', array( 'jquery' ), RECEPTION_PERCEPTION_VERSION, FALSE );
 
 	}
 

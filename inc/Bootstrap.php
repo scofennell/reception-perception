@@ -33,6 +33,7 @@ class Bootstrap {
 		$reception_perception -> enqueue               = new Enqueue;		
 		$reception_perception -> subsite_control_panel = new SubsiteControlPanel;
 		$reception_perception -> post_meta_box         = new PostMetaBox;
+		$reception_perception -> post_content          = new PostContent;		
 
 		return $reception_perception;
 

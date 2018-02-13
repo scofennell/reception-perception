@@ -89,17 +89,17 @@ class PostMetaFields {
 					'settings' => array(
 
 						// A setting.
-						'bt_0' => array(
+						'broken_tackles_0' => array(
 							'type'           => 'number',
-							'label'          => esc_html__( 'Last Name', 'rp' ),
-							'description'    => esc_html__( 'Last name.', 'rp' ),
+							'label'          => esc_html__( 'Zero Broken Tackles', 'rp' ),
+							'description'    => esc_html__( 'Zero broken tackles.', 'rp' ),
 							'attrs'          => array(
 								'step' => 'any'
 							),
 						),
 
 						// A setting.
-						'bt_1' => array(
+						'broken_tackles_1' => array(
 							'type'           => 'number',
 							'label'          => esc_html__( 'One Broken Tackle', 'rp' ),
 							'description'    => esc_html__( 'One broken tackle.', 'rp' ),
@@ -108,7 +108,7 @@ class PostMetaFields {
 							),
 						),
 
-						'bt_2' => array(
+						'broken_tackles_2' => array(
 							'type'           => 'number',
 							'label'          => esc_html__( 'Two or More Broken Tackles', 'rp' ),
 							'description'    => esc_html__( 'Two or more broken tackles.', 'rp' ),
@@ -380,7 +380,25 @@ class PostMetaFields {
 	 */
 	function get_values( $post_id ) {
 
-		$out = get_post_meta( $post_id, RECEPTION_PERCEPTION, TRUE );
+		$post_types = $this -> get_fields();
+		$fields     = $post_types[ get_post_type( $post_id ) ];
+
+		$out = array();
+
+		$post_meta = get_post_meta( $post_id );
+
+		foreach( $fields as $section_key => $section ) {
+
+			$settings = $section['settings'];
+
+			foreach( $settings as $setting_key => $setting ) {
+
+				//$out[ $section_key ][ $setting_key ] = $post_meta[ $section_key ][ $setting_key ];
+				$out[ $section_key ][ $setting_key ] = $post_meta[ RECEPTION_PERCEPTION . "-$section_key-$setting_key" ][ 0 ];
+			
+			}
+
+		}
 
 		return $out;
 

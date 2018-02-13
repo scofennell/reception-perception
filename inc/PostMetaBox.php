@@ -148,22 +148,22 @@ class PostMetaBox {
 
 				// Grab the value for this setting.
 				$value = '';
-				if( isset( $values[ $section_id ] ) ) {
-					if( isset( $values[ $section_id ][ $setting_id ] ) ) {
-						$value = $values[ $section_id ][ $setting_id ];
-
-						if( is_scalar( $value ) ) {
-
-							$value = esc_attr( $value );
-
-						} elseif( is_array( $value ) ) {
-
-							$value = array_map( 'esc_attr', $value );
-
-						}
-					}
+				if( isset( $values[ $section_id ][ $setting_id ] ) ) {
+					$value = $values[ $section_id ][ $setting_id ];
 				}
 
+				//wp_die( var_dump( $value ) );
+
+				if( is_scalar( $value ) ) {
+
+					$value = esc_attr( $value );
+
+				} elseif( is_array( $value ) ) {
+
+					$value = array_map( 'esc_attr', $value );
+
+				}
+		
 				// Grab the input for this setting.
 				$settings_out .= $this -> get_field( $post_id, $value, $section_id, $setting_id, $setting );
 
@@ -354,7 +354,17 @@ class PostMetaBox {
 		$posted_data = $this -> sanitize( $posted_data );
 		
 		// Finally!  Update the data.
-		update_post_meta( $post_id, RECEPTION_PERCEPTION, $posted_data );
+		foreach( $posted_data as $section_key => $section ) {
+		
+			foreach( $section as $setting_key => $setting ) {
+
+				update_post_meta( $post_id, RECEPTION_PERCEPTION . "-$section_key-$setting_key" , $posted_data[ $section_key ][ $setting_key ] );
+
+			}
+
+		}
+
+		//wp_die( var_dump( get_post_meta( $post_id, RECEPTION_PERCEPTION . "-bio-last_name", TRUE ) ) );
 
 		return $post_id;
 
